@@ -1,4 +1,4 @@
-import { enableProdMode } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 import { AppModule } from './app/app.module';
@@ -8,5 +8,5 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
+platformBrowserDynamic().bootstrapModule(AppModule,{providers: [{provide: DEFAULT_CURRENCY_CODE, useValue: 'USD' }]})
   .catch(err => console.log(err));

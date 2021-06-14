@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>restaurant</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-text-center">
+  <ion-title class="ion-padding">Seleccione una mesa</ion-title>
+
+<div class="content">
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row>
+      <ion-col *ngFor="let table of this.Tables" size="4">
+        <ion-card button (click)="goTable(table.id)">
+          <ion-card-header >
+            <ion-label >Mesa #{{table.id}}</ion-label>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+</ion-content>

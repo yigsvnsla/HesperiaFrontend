@@ -1,0 +1,29 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="ion-text-center" >
+    
+    <ion-title>
+      Hesperia
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="content">
+   
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12" style=" justify-content: center;align-items: center;" class="ion-text-center">
+          <ion-title  class="ion-margin">Selecciona tu servicio</ion-title>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6" class="ion-no-padding">
+          <app-home-card url="restaurant" title="Restaurant" image="./../../assets/svg/undraw_cooking_lyxy.svg"></app-home-card>
+        </ion-col>
+        <ion-col size="6" class="ion-no-padding">
+          <app-home-card url="rooms" title="Habitaciones" image="./../../assets/svg/undraw_map_1r69.svg"></app-home-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

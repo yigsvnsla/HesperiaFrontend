@@ -24,3 +24,15 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+.ModalPlatesInfoComponent-class{
+    --width: 85vw;
+    --height: 95vh;
+    --border-radius: 16px;
+    --backdrop-opacity:0.9;
+}
+ion-item::part(native) {
+    //WRITE ALL YOUR CSS RULES HERE
+    --inner-padding-end: 0px;
+    /** and lots more **/
+  }

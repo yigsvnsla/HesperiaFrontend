@@ -1,0 +1,15 @@
+ion-img{
+    width: 120px;
+    height: 120px;
+}
+
+ion-card-content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+ion-card-header{
+    padding-inline: 0 !important;
+}

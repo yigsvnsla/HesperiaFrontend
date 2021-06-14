@@ -1,0 +1,58 @@
+<div class="content">
+  <ion-slides *ngIf="viewEntered" class="imgContainer" #Slides [options]="sliderOpts">
+    <ion-slide  *ngFor="let photo of Item.product.image"
+    [ngStyle]="{
+      'background' :'url(/api/' + photo.url + ')',
+      'background-size' :'cover',
+      'background-repeat' :'no-repeat',
+      'background-position' :'center center'
+    }">
+    <ion-buttons>
+      <ion-button (click)="closeModal()">
+        <ion-icon slot="start" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    </ion-slide>
+  </ion-slides>
+  <ion-card>
+    <ion-card-header>
+      <!-- <ion-card-subtitle>es uno de los entremeses favoritos de las fiestas puertorriqueñas</ion-card-subtitle> -->
+      <ion-card-title >{{Item.product.name}}</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+</div>
+  <ion-card mode="md" class="info">
+      <ion-card-content >
+        <ion-grid >
+          <ion-row>
+            <ion-col #colDescription>
+              <ion-item lines="none">
+                <ion-label position="floating">Description</ion-label>
+                <ion-textarea
+                  rows="6"
+                  cols="32"
+                  readonly="true"
+                  [value]="Item.product.description">
+                </ion-textarea>
+              </ion-item>
+            </ion-col>
+            <ion-col size="3">
+              <ion-item lines="none" class="ion-no-padding">
+                <ion-label position="floating">Price</ion-label>
+                <ion-input type="text" [value]="Item.product.price | currency"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+  </ion-card>
+  
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+      <ion-card-title>Awesome Title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Awesome content
+    </ion-card-content>
+  </ion-card>

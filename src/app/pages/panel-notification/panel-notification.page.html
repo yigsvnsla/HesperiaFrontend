@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Panel</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+<ion-list lines="none">
+
+  <ion-grid fixed class="ion-no-padding">
+    <ion-row *ngFor="let notification of arrList" >
+      <ion-col size="7" *ngIf="notification.table.getService">
+        <ion-item  class="ion-no-margin" >
+          <ion-icon slot="start" name="restaurant"></ion-icon>
+          <ion-label position="floating">Solicitan en:</ion-label>
+          <ion-input disabled="true" type="text" [value]="'Mesa #'+ notification.table.idTable"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col style="display: flex; justify-content: center; align-items: center;" *ngIf="notification.table.getService">
+        <ion-chip button (click)="notification.table.getService = false; onDelete(notification.id)">
+          <ion-label>Atender</ion-label>
+          <ion-icon name="close-circle"></ion-icon>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-list>
+</ion-content>

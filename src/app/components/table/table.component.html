@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title slot="start">Categorias</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<app-fab-button fixed></app-fab-button>
+
+<ion-content class="ion-text-center">
+  <ion-title  class="ion-margin">Selecciona un categoria</ion-title>
+  <ion-grid fixed>
+    <ion-row >
+      <ion-col size="6" *ngFor="let category of this.Categorys">
+        <ion-card button (click)="onSelect(category)">
+          <ion-card-content class="ion-text-center">
+            <ion-label>{{category.name}}</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
