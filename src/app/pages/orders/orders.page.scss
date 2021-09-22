@@ -1,0 +1,23 @@
+ion-item::part(native){
+    overflow: initial;
+    div.item-inner{
+        padding-inline-end:0;
+
+    }
+    padding-inline-end:0;
+}
+
+#venta{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.content{
+    width: 100%;
+    height: 100%;
+}
+
+p{
+    color: #ff4961;
+}

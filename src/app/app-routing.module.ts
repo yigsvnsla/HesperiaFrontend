@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'panel',
     loadChildren: () => import('./pages/panel-notification/panel-notification.module').then( m => m.PanelNotificationPageModule)
   },
+  {
+    path: 'orders/table/:id',
+    loadChildren: () => import('./pages/orders/orders.module').then( m => m.OrdersPageModule)
+  },
   
 ];
 

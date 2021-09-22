@@ -1,3 +1,4 @@
+import { Category, ProductOfOrder } from './../../interfaces/products';
 import { UiComponentsService } from 'src/app/services/ui-components.service';
 import { ModalController } from '@ionic/angular';
 import { Component, Input, OnInit } from '@angular/core';
@@ -10,14 +11,15 @@ import { ModalPlatesInfoComponent } from '../modal-plates-info/modal-plates-info
 })
 export class PlatesComponent implements OnInit {
 
-  @Input() Category:any
-  
+  @Input() Category:Category
+  @Input() idTable:string
   constructor(
     private modalController:ModalController,
     private uiComponentsService:UiComponentsService
   ) { }
 
   ngOnInit() {
+
   }
 
   onExit(){
@@ -29,19 +31,24 @@ export class PlatesComponent implements OnInit {
   }
 
 
-  viewProduct(product:any){
+  async viewProduct(product:any){
     this.uiComponentsService.showModal({
       component:ModalPlatesInfoComponent,
       componentProps:{
-        Item:product
+        idTab:this.idTable,
+        Item:{
+          category:this.Category.name,
+          product:product.product,
+        }
       },
       cssClass: 'ModalPlatesInfoComponent-class',
       backdropDismiss:true,
       keyboardClose:true,
       mode:'ios',
       showBackdrop:true,
-      swipeToClose:false
+      swipeToClose:false,
+      id:'plates',
     })
+    this.onExit()
   }
-
 }

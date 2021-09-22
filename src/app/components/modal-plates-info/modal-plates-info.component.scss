@@ -1,5 +1,5 @@
 div.content{
-    height: 70%;
+    height: 30%;
     width: 100%;
     position: relative; 
     ion-card{
@@ -29,25 +29,6 @@ ion-col{
     padding-top:0;
 }
 
-ion-card.info{
-    ion-card-content{
-        padding-top: 0;
-        padding-bottom: 0;
-        padding-left: 0;
-        padding-right: 0;
-        ion-grid{
-            padding-top: 0;
-            padding-left: 0;
-            padding-right: 0;
-        }
-        ion-textarea{
-            --padding-top:0;
-            --padding-bottom:0;
-
-            // margin-top: 0;
-        }
-    }
-}
 
 ion-slides.imgContainer{
     height: 100%;

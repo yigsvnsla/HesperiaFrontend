@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="onExit()">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>View Order</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card >
+    <ion-grid fixed class="ion-no-padding">
+      <ion-card-header>
+        <ion-row class="ion-align-items-center"> 
+          <ion-col sizeXs="3" sizeSm="2" class="centered  ion-margin"> 
+            <ion-img class="customIcon" src="../../../assets/svg/food-serving.svg"></ion-img>
+          </ion-col>
+          <ion-col sizeXs="7" sizeSm="8" sizeMd="3">
+            <ion-card-subtitle>Pedido desde </ion-card-subtitle>
+            <ion-card-title>ㅤMesa: {{this.Order.comanda.idTable}}</ion-card-title>
+          </ion-col>
+          <ion-col sizeXs="6" sizeMd="3">
+            <ion-button expand="block"  color="danger" shape="round">
+              <ion-label>Cancelar</ion-label>
+              <ion-icon slot="start" name="close"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col sizeXs="6" sizeMd="3">
+            <ion-button expand="block" color="success" shape="round">
+              <ion-label>Confirmar</ion-label>
+              <ion-icon slot="start" name="checkmark"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content class="ion-no-padding">
+        <ion-row>
+          <ion-col>
+            <ion-item class="ion-text-center" lines="none">
+              <ion-label>
+                <p>Cantidad Total</p>
+                <h2>{{this.Order.comanda.totalItems}}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item class="ion-text-center" lines="none">
+              <ion-label>
+                <p>Precio Total</p>
+                <h2>{{this.Order.comanda.totalPrice |currency}}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item class="ion-text-center" lines="none">
+              <ion-label>
+                <p>Pizza</p>
+                <h2>Hawaii</h2>
+              </ion-label>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-list>
+          <ion-item *ngFor="let item of Order.comanda.listProduct" lines="none" >
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size="6">
+                  <ion-label>
+                    <p>{{item.category}}</p>
+                    <h2>{{this.item.product.name}}</h2>
+                  </ion-label>
+                </ion-col>
+                <ion-col class="ion-text-center" size="3">
+                  <ion-label>
+                    <p>Cantidad</p>
+                    <h2>{{this.item.cantProduct}}</h2>
+                  </ion-label>
+                </ion-col>
+                <ion-col class="ion-text-center" size="3">
+                  <ion-label>
+                    <p>Precio</p>
+                    <h2>{{this.item.product.price*this.item.cantProduct| currency}}</h2>
+                  </ion-label>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-grid>
+
+  </ion-card>
+</ion-content>

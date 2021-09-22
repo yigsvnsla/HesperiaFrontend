@@ -6,26 +6,24 @@ import { Storage } from '@capacitor/storage';
 })
 export class LocalStorageService {
 
-  public urlPrimary:string
+  constructor() {  }
 
-  constructor() { 
-    
-  }
-  
     //  To set an item, use set(key, value):
-  public async set(key:string,value:{}) {
+  public async set(key:string,value:{}|[]) {
     if (await this.get(key) == null) {
-      await Storage.set({  key,  value:JSON.stringify(value)  });
-    }// else { this element exist }
+      await Storage.set( { key,  value:JSON.stringify(value) });
+    }else { 
+      // exist
+    }
   }
     //To get the item back, use get(name):
-  public async get(key: string) {
+  public async get(key: string):Promise<any>{
     return JSON.parse((await Storage.get({ key: key })).value);
   }
     // to update element insert
   public async update(key:string,value:{}){
     if (await this.get(key) != null) {
-      await Storage.set({  key,  value:JSON.stringify(value)  });
+      await Storage.set({ key,  value:JSON.stringify(value) });
     }// else { this element not exist }
   }
     //To remove an item:
@@ -41,6 +39,4 @@ export class LocalStorageService {
     return await Storage.keys()
   }
 }
-
-
 

@@ -1,4 +1,4 @@
-import { AlertController } from '@ionic/angular';
+import { AlertController, PickerController } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { LoadingController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { ModalOptions } from '@ionic/core';
 import { MenuController } from '@ionic/angular';
 import { AlertOptions } from '@ionic/core';
-
+import { PickerOptions } from "@ionic/core";
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +17,9 @@ export class UiComponentsService {
     private loadingController: LoadingController,
     private modalController: ModalController,
     private menuController:MenuController,
-    private alertController:AlertController
-    ) { }
+    private alertController:AlertController,
+    private pickerController:PickerController
+  ) { }
 
   async showAlert(alertOptions:AlertOptions):Promise<HTMLIonAlertElement>{
     let alert: HTMLIonAlertElement = await this.alertController.create(alertOptions)
@@ -53,13 +54,20 @@ export class UiComponentsService {
     let modal: HTMLIonModalElement = await this.modalController.create(options);
     modal.present()
     return new Promise(async (value) => {
-      
-        value((await modal.onDidDismiss()).data)
-  
+      value((await modal.onDidDismiss()).data)
+    })
+  }
+
+  async showPicker(options:PickerOptions):Promise<HTMLIonPickerElement>{
+    let picker = await this.pickerController.create(options)
+    picker.present()
+    return new Promise((resolve)=>{
+      resolve(picker)
     })
   }
 
   async menuControl():Promise<MenuController>{
     return this.menuController;
   }
+
 }

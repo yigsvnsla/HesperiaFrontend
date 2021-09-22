@@ -1,3 +1,4 @@
+import { PipesModule } from './pipes/pipes.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UiComponentsService } from './services/ui-components.service';
 import { CoreConectionService } from './services/core-conection.service';
@@ -20,7 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     ComponentModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     HttpClientModule,

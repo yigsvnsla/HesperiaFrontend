@@ -25,14 +25,56 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+// ion-modals
 .ModalPlatesInfoComponent-class{
     --width: 85vw;
-    --height: 95vh;
+    --height: 85vh;
     --border-radius: 16px;
     --backdrop-opacity:0.9;
 }
+
+ion-modal.my-custom-class-viewInfo{
+    --width: 95vw;
+    --height: 90vh;
+    --border-radius: 16px;
+    --backdrop-opacity:0.6 !important;
+}
+
+// ion-item
 ion-item::part(native) {
     //WRITE ALL YOUR CSS RULES HERE
     --inner-padding-end: 0px;
     /** and lots more **/
-  }
+}
+
+// ion-picker
+div.picker-toolbar-cancel{
+    .picker-button.sc-ion-picker-md.picker-button{
+        color: var(--ion-color-danger-shade);
+    }
+}
+div.picker-toolbar-button {
+    .picker-button.sc-ion-picker-md.picker-button{
+        color: var(--ion-color-danger);
+    }
+}
+.picker-prefix, .picker-suffix, .picker-opt.picker-opt-selected {
+    color: var(--ion-color-danger);
+}
+
+//customClass
+
+.centered{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ion-img.customIcon{
+
+        display: block;
+        color:aqua;
+        width: 48px;
+        height:48px;
+
+}

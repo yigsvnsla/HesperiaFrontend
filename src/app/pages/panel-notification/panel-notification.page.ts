@@ -1,5 +1,7 @@
+import { ModalViewOrderComponent } from './../../components/modal-view-order/modal-view-order.component';
 import { UiComponentsService } from './../../services/ui-components.service';
 import { CoreConectionService } from 'src/app/services/core-conection.service';
+import { order } from './../../interfaces/products';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,34 +12,47 @@ import { Component, OnInit } from '@angular/core';
 export class PanelNotificationPage implements OnInit {
 
   public arrList:any[]
-
   constructor(
-    private coreConectionService:CoreConectionService,
-    private uiComponentsService:UiComponentsService
+    private coreConectionService: CoreConectionService,
+    private uiComponentsService: UiComponentsService
+    ) { 
+    this.arrList = []    
+    }
 
-  ) { }
+  ionViewWillEnter(){
+    /////////////////////////////////////////////////////
+    this.coreConectionService.getNotification()
+      .subscribe(data=>{
+        if ( JSON.stringify(data) !== JSON.stringify(this.arrList)){
+          for(let i of data){
+            if (!this.arrList.some(val => val.comanda.idTable === i.comanda.idTable)) {
+              this.arrList.push(i)
+            }
+          }
+      
+      }
+    })
+    /////////////////////////////////////////////////////
+  }    
+
 
   async ngOnInit() {
-
-    this.arrList = await this.coreConectionService.getNotification()
-
-    setInterval(async ()=>{
-      let newArr = await this.coreConectionService.getNotification()
-      if(this.arrList.toString() != newArr.toString()){
-        for (const i of newArr) {
-          if(!this.arrList.includes(i)){
-            this.arrList = newArr
-            console.log(this.arrList);
-          }
-        }
-      }
-    },3000)  
-
+    this.arrList = await this.coreConectionService.findArray('notifications')
   }
 
-  async onDelete(id:string){
-    
-    this.coreConectionService.delete('notifications/' + id)
+  async onDelete(id: number,index:number) {
+    this.arrList.splice(index)
+    this.coreConectionService.delete(`notifications/${id}`)
+  }
+
+  viewInfo(order:order){ 
+    this.uiComponentsService.showModal({
+      component:ModalViewOrderComponent,
+      cssClass: 'my-custom-class-viewInfo',
+      componentProps:{
+        Order:order
+      }
+    })
   }
 
 }

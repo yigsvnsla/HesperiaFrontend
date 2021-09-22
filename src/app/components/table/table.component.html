@@ -4,8 +4,6 @@
   </ion-toolbar>
 </ion-header>
 
-<app-fab-button fixed></app-fab-button>
-
 <ion-content class="ion-text-center">
   <ion-title  class="ion-margin">Selecciona un categoria</ion-title>
   <ion-grid fixed>
@@ -18,5 +16,35 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <ion-row class="center">
+      <ion-col size="6" >
+        <ion-button (click)="goToOrder()" expand="block"  shape="round">
+          <ion-label>Ver Pedidos</ion-label>
+          <ion-icon slot="start" name="add"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid fixed="true">
+      <ion-row>
+        <ion-col size="6">
+          <ion-button (click)="goToOrder()" color="danger" expand="block" fill="outline" shape="round">
+            <ion-icon slot="start" name="restaurant"></ion-icon>
+            <ion-label>Pedido</ion-label>
+          </ion-button>
+        </ion-col>
+        <ion-col size="6">
+          <ion-button (click)="requestInnkeeper()" [disabled]="this.awaitRequest"  color="primary" expand="block" fill="outline" shape="round">
+            <ion-icon slot="start" name="people"></ion-icon>
+            <ion-label *ngIf="!this.awaitRequest">Solicitar</ion-label>
+            <ion-label *ngIf="this.awaitRequest">{{this.timer$ | async | time}}</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

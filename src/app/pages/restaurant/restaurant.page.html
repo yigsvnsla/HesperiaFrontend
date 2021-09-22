@@ -7,20 +7,121 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-text-center">
-  <ion-title class="ion-padding">Seleccione una mesa</ion-title>
+<ion-segment *ngIf="this.view" [value]="'Mesas'" (ionChange)="segmentChanged($event)">
+  <ion-segment-button [value]="'Mesas'">
+    <ion-label>Mesas</ion-label>
+  </ion-segment-button>
+  <ion-segment-button [value]="'Pedidos'">
+    <ion-label>Pedidos</ion-label>
+  </ion-segment-button>
+</ion-segment>
 
-<div class="content">
-  <ion-grid fixed class="ion-no-padding">
-    <ion-row>
-      <ion-col *ngFor="let table of this.Tables" size="4">
-        <ion-card button (click)="goTable(table.id)">
-          <ion-card-header >
-            <ion-label >Mesa #{{table.id}}</ion-label>
-          </ion-card-header>
+<ion-content class="ion-text-center">
+  <ion-grid *ngIf="this.view">
+    <!-- si el view es un movil-->
+    <ion-row style="height: 100%">
+      <ion-col *ngIf="this.segment == 'Mesas'" class="ion-align-self-center" size="12">
+        <ion-title class="ion-padding">Seleccione una mesa</ion-title>
+        <ion-row>
+          <ion-col *ngFor="let table of this.Tables" size="4">
+            <ion-card button (click)="goTable(table.id)">
+              <ion-card-header>
+                <ion-label>Mesa #{{table.id}}</ion-label>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col *ngIf="this.segment == 'Pedidos'" size="12">
+        <div class="content" *ngIf="!this.arrList?.length">
+          <ion-img [src]="'../../../assets/svg/undraw_map_1r69.svg'"></ion-img>
+          <ion-row>
+            <ion-title >✨ No hay notificaciones ✨</ion-title>
+          </ion-row>
+        </div>  
+        <ion-card *ngIf="this.arrList.length > 0" class="notification"> 
+            <ion-list lines="none" >
+              <ion-grid fixed class="ion-no-padding">
+                <ion-row *ngFor="let notification of this.arrList; let i = index">
+                  <ion-col size="7" *ngIf="notification.comanda.statusTable">
+                    <ion-item class="ion-no-margin" button (click)="viewInfo(notification)">
+                      <ion-icon slot="start" name="restaurant"></ion-icon>
+                      <ion-label position="floating">Solicitan en:</ion-label>
+                      <ion-input readonly="true" type="text" [value]="'Mesa: '+ notification.comanda.idTable">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col style="display: flex; justify-content: center; align-items: center;"
+                    *ngIf="notification.comanda.statusTable">
+                    <ion-chip button (click)="onDelete(notification.id,i)">
+                      <ion-label>Atender</ion-label>
+                      <ion-icon name="close-circle"></ion-icon>
+                    </ion-chip>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-list>
+
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-</div>
+
+  <!-- si el view es un pc -->
+  <ion-row *ngIf="!this.view">
+    <ion-col size="6">
+      <ion-title class="ion-padding">Seleccione una mesa</ion-title>
+    </ion-col>
+    <ion-col size="6">
+      <ion-title class="ion-padding">Lista de Pedidos</ion-title>
+    </ion-col>
+  </ion-row>
+  <ion-grid *ngIf="!this.view" style="height: 90%">
+    <ion-row style="height: 100%">
+      <ion-col class="ion-align-self-center" size="6">
+        <ion-row>
+          <ion-col *ngFor="let table of this.Tables" size="4">
+            <ion-card button class="table" (click)="goTable(table.id)">
+              <ion-card-header>
+                <ion-label>Mesa #{{table.id}}</ion-label>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+      <ion-col size="6">
+        <ion-card class="notification"> 
+          <ion-card-content style="height: 100%;">
+            <div class="content" *ngIf="!this.arrList?.length">
+              <ion-img [src]="'../../../assets/svg/undraw_map_1r69.svg'"></ion-img>
+              <ion-row>
+                <ion-title >✨ No hay notificaciones pendientes ✨</ion-title>
+              </ion-row>
+            </div>
+            <ion-list lines="none" *ngIf="this.arrList.length > 0">
+              <ion-grid fixed class="ion-no-padding">
+                <ion-row *ngFor="let notification of this.arrList; let i = index">
+                  <ion-col size="7" *ngIf="notification.comanda.statusTable">
+                    <ion-item class="ion-no-margin" button (click)="viewInfo(notification)">
+                      <ion-icon slot="start" name="restaurant"></ion-icon>
+                      <ion-label position="floating">Solicitan en:</ion-label>
+                      <ion-input readonly="true" type="text" [value]="'Mesa: '+ notification.comanda.idTable">
+                      </ion-input>
+                    </ion-item>
+                  </ion-col>
+                  <ion-col style="display: flex; justify-content: center; align-items: center;"
+                    *ngIf="notification.comanda.statusTable">
+                    <ion-chip button (click)="onDelete(notification.id,i)">
+                      <ion-label>Atender</ion-label>
+                      <ion-icon name="close-circle"></ion-icon>
+                    </ion-chip>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

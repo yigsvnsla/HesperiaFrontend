@@ -21,38 +21,53 @@
     </ion-card-header>
   </ion-card>
 </div>
-  <ion-card mode="md" class="info">
-      <ion-card-content >
-        <ion-grid >
-          <ion-row>
-            <ion-col #colDescription>
-              <ion-item lines="none">
-                <ion-label position="floating">Description</ion-label>
-                <ion-textarea
-                  rows="6"
-                  cols="32"
-                  readonly="true"
-                  [value]="Item.product.description">
-                </ion-textarea>
-              </ion-item>
-            </ion-col>
-            <ion-col size="3">
-              <ion-item lines="none" class="ion-no-padding">
-                <ion-label position="floating">Price</ion-label>
-                <ion-input type="text" [value]="Item.product.price | currency"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-  </ion-card>
+
+<ion-content>
+  <ion-grid fixed="true" >
+    <ion-row>
+      <ion-col  size="12" size-sm="6" class="ion-no-padding">
+        <ion-card >
+          <ion-card-header>
+            <ion-card-subtitle>Descripcion</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content style="overflow-y:scroll; overflow-x:hidden; height: auto; max-height: 350px;">
+            <p>{{Item.product.description}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="12" size-sm="6">
+        <ion-card>
+          <ion-card-content class="ion-no-padding">
+            <ion-grid fixed>
+              <ion-row>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-label position="floating">Precio</ion-label>
+                    <ion-icon color="danger" slot="start" name="cash-outline"></ion-icon>
+                    <ion-input type="text" [value]="Item.product.price | currency"></ion-input>
+                  </ion-item>
+                </ion-col>
+                <ion-col size="12" size-md="6">
+                  <ion-item lines="none">
+                    <ion-label position="floating">Preparacion</ion-label>
+                    <ion-icon color="danger" slot="start" name="timer-outline"></ion-icon>
+                    <ion-input type="text" [value]="Item.product.price + ':00 minutes'"></ion-input>
+                  </ion-item>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button (click)="addCarrito()" [disabled]="this.addButton" expand="block" fill="outline" color="danger" shape="round">
+          <ion-label>Agregar al pedido</ion-label>
+          <ion-icon slot="start" name="add"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
   
-  <ion-card>
-    <ion-card-header>
-      <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
-      <ion-card-title>Awesome Title</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Awesome content
-    </ion-card-content>
-  </ion-card>
+</ion-content>
